@@ -1,4 +1,3 @@
-const util = require('util')
 const http = require('http')
 
 /**
@@ -12,13 +11,11 @@ class HTTPServer {
     this.server = http.createServer()
   }
 
-  async bootstrap () {
+  bootstrap (cb) {
     const self = this
 
     this.server.on('request', handleRequest)
-    await util.promisify((cb) => {
-      this.server.listen(this.port, cb)
-    })()
+    this.server.listen(this.port, cb)
 
     function handleRequest (req, res) {
       self.onRequest(req, res)
@@ -31,12 +28,6 @@ class HTTPServer {
 
   onRequest (req, res) {
     this.handler.handle(req, res)
-      .catch((err) => {
-        console.error('promise error oops', err)
-
-        res.statusCode = 500
-        res.end('Unexpected error')
-      })
   }
 }
 

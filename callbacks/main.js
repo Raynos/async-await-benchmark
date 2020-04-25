@@ -8,7 +8,7 @@ const MyApp = require('./my-app.js')
  * Then mounting two routes onto the server.
  * These two endpoints do reads and writes to levelDB
  */
-async function main () {
+function main () {
   const server = new FrameworkServer(8000)
   const myApp = new MyApp()
 

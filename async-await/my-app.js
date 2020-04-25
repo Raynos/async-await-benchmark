@@ -5,6 +5,13 @@ const path = require('path')
 const LevelDown = require('leveldown')
 const AsyncLevel = require('../vendor/async-level.js')
 
+const pkgLock = JSON.stringify(require('../package-lock.json'))
+
+let largeStr = ''
+do {
+  largeStr += pkgLock
+} while (largeStr.length <= 8 * 1024)
+
 /**
  * Respesent some application code.
  */
@@ -59,7 +66,8 @@ class MyApp {
 
     const { err } = await this.db.put(`user:${req.body.id}`, {
       id: req.body.id,
-      email: req.body.email
+      email: req.body.email,
+      bigData: largeStr
     })
 
     if (err) {
