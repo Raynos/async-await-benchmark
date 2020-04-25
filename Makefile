@@ -1,7 +1,11 @@
 
 .PHONY: start_await
 start_await:
-	node async-await.js
+	node async-await/main.js
+
+.PHONY: 0x_await
+0x_await:
+	0x -P 'autocannon -c 100 -d 5 -p10 http://localhost:8000/get-user?id=42' -- node async-await/main.js
 
 .PHONY: write_data
 write_data:
