@@ -7,6 +7,9 @@ const LevelDown = require('leveldown')
 const AsyncLevel = require('./vendor/async-level.js')
 const HTTPHash = require('http-hash')
 
+/**
+ * Represents a low level HTTP server library.
+ */
 class HTTPServer {
   constructor (port, handler) {
     this.port = port
@@ -184,7 +187,11 @@ class MyApp {
 }
 
 /**
- * Represent a normal server.
+ * Represent a real app. For example using a HTTP framework
+ * and importing the application business logic.
+ *
+ * Then mounting two routes onto the server.
+ * These two endpoints do reads and writes to levelDB
  */
 async function main () {
   const server = new FrameworkServer(8000)
@@ -200,6 +207,7 @@ async function main () {
     return myApp.createUser(req)
   })
 
+  console.log('pid', process.pid, process.version)
   console.log('server listening', server.address())
 }
 

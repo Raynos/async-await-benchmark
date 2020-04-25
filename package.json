@@ -11,5 +11,9 @@
   "dependencies": {
     "http-hash": "2.0.1",
     "leveldown": "5.6.0"
+  },
+  "devDependencies": {
+    "0x": "4.9.1",
+    "autocannon": "4.6.0"
   }
 }
